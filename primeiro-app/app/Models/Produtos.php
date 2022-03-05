@@ -11,4 +11,8 @@ class Produtos extends Model
     protected $fillable = ['nome', 'descricao', 'preco'];
 
     protected $table = 'Produtos';
+
+    function produto (){
+        return $this->hasMany(Vendas::class, 'id');
+    }
 }

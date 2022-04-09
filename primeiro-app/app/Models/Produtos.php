@@ -8,11 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Produtos extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'descricao', 'preco'];
+
+    protected $fillable = ['id', 'nome', 'descricao', 'preco'];
 
     protected $table = 'Produtos';
 
-    function produto (){
-        return $this->hasMany(Vendas::class, 'id');
-    }
+    
 }

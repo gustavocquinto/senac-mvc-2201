@@ -15,8 +15,6 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                    &nbsp;
-                        <a href="/listarClientes"> Listar Clientes </a>
                 </div>
             </div>
         </div>

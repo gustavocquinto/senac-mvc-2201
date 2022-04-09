@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class NotasFiscais extends Model
 {
     use HasFactory;
-    protected $fillable = ['venda_id', 'valor', 'imposto'];
 
+    protected $fillable = ['id','venda_id','valor','imposto'];
     protected $table = 'NotasFiscais';
 
-    function venda(){
-        return $this->hasOne(NotasFiscais::class, 'id');
+    public function venda(){
+        return $this->hasOne(Vendas::class, 'id');
     }
+ 
 }

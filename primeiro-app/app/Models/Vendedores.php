@@ -9,7 +9,7 @@ class Vendedores extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome'];
-
+    protected $fillable =['id', 'nome', ];
     protected $table = 'Vendedores';
+
 }

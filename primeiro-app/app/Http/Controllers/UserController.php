@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Role;
-
-use Spatie\Permission\Models\Permission;
-
 use DB;
 use Hash;
 use App\Models\User;
@@ -23,18 +20,8 @@ class UserController extends Controller
     {
         $data = User::orderBy('id', 'DESC')->paginate(5);
 
-        /*$user = User::create([ // create user admin
-            'name' => 'Leonardo',
-            'email' => 'leonardo@leonardo.com.ru',
-            'password' => bcrypt('123456')]);
-
-        $role = Role::create(['name' => 'Admin']); // create a new role called admin
-        $permissions = Permission::pluck('id','id')->all(); // get all permissions id
-        $role->syncPermissions($permissions); // assign all permissions to admin role
-        $user->assignRole([$role->id]); // assign role to user
-        */
-
-        return view('users.index', compact('data'))->with('i', ($request->input('page', 1) -1 ) * 5);
+        return view('users.index', compact('data'))->with('i',
+                                                         ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -58,20 +45,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required',
-                                   'email' => 'required|email|',
+                                   'email' => 'required |email|unique:users,email',
                                    'password' => 'required|same:confirm-password',
                                    'roles' => 'required']);
 
         $input = $request->all();
 
-        $input['password'] = Hash::make($input['password']);
+        $input['password'] = Hash::make($input['password']);//criptografando a senha
 
         $user = User::create($input);
 
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso');
-
     }
 
     /**
@@ -80,13 +66,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-     //mostar as info de um usuario especifico
     public function show($id)
     {
         $user = User::find($id);
 
         return view('users.show', compact('user'));
+
     }
 
     /**
@@ -104,7 +89,6 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name', 'name')->all();
 
         return view('users.edit', compact('user', 'roles', 'userRole'));
-
     }
 
     /**
@@ -117,7 +101,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, ['name' => 'required',
-                                   'email' => 'required|email',
+                                   'email' => 'required |email',
                                    'password' => 'required|same:confirm-password',
                                    'roles' => 'required']);
 
@@ -125,8 +109,9 @@ class UserController extends Controller
 
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
+
         }else{
-            $input = Arr::expect($input, array('password'));
+            $input = Arr::except($input, array('password'));
         }
 
         $user = User::find($id);
@@ -136,9 +121,10 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete();
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso');
+        return redirect()->route('users.index')->with('sucess', 'Usuário atualizado com sucesso');
 
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -150,7 +136,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
 
-        return redirect()->route('users.index')->with('success', 'Usuário removido com sucesso');
-
+        return redirect()->route('users.index')->with('success', 'Usuario removido com sucesso');
     }
 }

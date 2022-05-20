@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,34 +17,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/avisos', function(){
-    return view('avisos', ['nome' => 'Leticia', 'mostrar' => true, 'avisos' => [['id' => 1, 'aviso'=>'lalalal'],
-                                                                               ['id' => 2, 'aviso' => 'dscjsdjc'],
-                                                                               ['id' => 3, 'aviso'=>'dskfvndkvnkdnvkdnvkndvkndkvndk']]]);
+Route::get('/avisos', function (){
+    return view('avisos', ['nome' => 'Clientes', 'mostrar' => true,
+                'avisos' =>[['id'=> 1, 'cliente' => 'Leonardo Rodrigues'],
+                            ['id'=> 2, 'aviso' => 'Intervalo'],
+                            ['id'=> 3, 'aviso' => 'Final da aula']
+                        ]]);
 });
 
+Route::get('/index', function () {
+    return view('index', ['carousel' => true,
+                'forms' => ['nome', 'sobrenome', 'cidade']]);
 
-Route::get('/cachorro', function(){
-    return view('cachorros', ['nome' => 'Raças de Doguinhos', 'mostrar' => true, 'racas' => [['id' => 1, 'raca'=>'Golden'],
-                                                                                            ['id' => 2, 'raca' => 'Shih tzu'],
-                                                                                            ['id' => 3, 'raca'=>'Srd']],
-                                                                                'nomes'=> [['id' => 1, 'nome'=>'Le'],
-                                                                                          ['id' => 2, 'nome' => 'Leo'],
-                                                                                          ['id' => 3, 'nome'=>'Ra'],['id' => 4, 'nome'=>'Gui'] ] ]);
 });
-
-
 
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::prefix('clientes')->group(function(){
-    Route::get('/listar', [App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth'); //Listando os dados do banco de dados.
+
+    Route::get('listar', [App\Http\Controllers\ClientesController::class, 'listar'])->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('/users', App\Http\Controllers\UserController::class);
     Route::resource('/roles', App\Http\Controllers\RoleController::class);
+    Route::resource('/clients', App\Http\Controllers\ClientesController::class);
+
 });
 

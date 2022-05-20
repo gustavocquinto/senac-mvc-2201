@@ -5,27 +5,27 @@
     <hr>
 @endsection
 @section('content')
-
-    @if($mostrar)
+@if ($mostrar)
     <div class="alert alert-danger" role="alert">
-        Atenção:lembre dos avisos
+        Atenção Lembre dos Avisos
     </div>
+
     @else
     <div></div>
+
     @endif
 
     <table class="table">
         <tr><td>Quadro de Avisos de {{$nome}}</td></tr>
-
         @foreach($avisos as $aviso)
-        <tr><td>Aviso #{{$aviso['id']}} <br> {{$aviso['aviso']}}</td></tr>
+        <tr><td>Aviso #{{$aviso ['id']}} <br>{{$aviso ['aviso']}}</td></tr>
         @endforeach
         <?php
-            foreach($avisos as $aviso){
-                echo "<tr><td>Aviso #{$aviso['id']} <br>{$aviso['aviso']} <td></tr>\n";
+        foreach($avisos as $aviso){
 
-            }
+       echo "<tr><td>Aviso #{$aviso ['id']} <br>{$aviso ['aviso']}</td></tr>\n";
+
+        }
         ?>
     </table>
-
 @endsection

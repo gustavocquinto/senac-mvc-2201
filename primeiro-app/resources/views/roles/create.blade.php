@@ -1,3 +1,6 @@
+cl1p.net - The internet clipboard Login/Sign Up cl1p.net/feio
+Here is your stuff. Thanks for using cl1p. Tell your friends! Copy
+Create an account for more features.
 @extends('layouts.app')
 
 
@@ -66,3 +69,4 @@
 {!! Form::close() !!}
 
 @endsection
+

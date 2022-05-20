@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-
 class SeederTablePermissions extends Seeder
 {
     /**
@@ -16,10 +15,14 @@ class SeederTablePermissions extends Seeder
      */
     public function run()
     {
-        $permissions = ['role-list', 'role-create',
-                        'role-edit', 'role-delete',
-                        'cliente-list', 'cliente-create',
-                        'cliente-edit', 'cliente-delete'];
+        $permissions = ['role-list',
+                        'role-create',
+                        'role-delete',
+                        'role-edit',
+                        'cliente-list',
+                        'cliente-edit',
+                        'cliente-create',
+                        'cliente-delete',];
 
         foreach($permissions as $permission){
             Permission::create(['name' => $permission]);

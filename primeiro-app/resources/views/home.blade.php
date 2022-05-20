@@ -15,6 +15,12 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    &nbsp;
+                    <a href="/clients">Clientes</a>
+                    &nbsp;
+                    <a href="/users">Usuarios</a>
+                    &nbsp;
+                    <a href="/roles">Perfis</a>
                 </div>
             </div>
         </div>

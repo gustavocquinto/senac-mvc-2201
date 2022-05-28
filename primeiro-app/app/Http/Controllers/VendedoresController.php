@@ -115,95 +115,29 @@ class VendedoresController extends Controller
         }
 
         return json_encode($ret);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+    public function checkVendedor(int $id):bool
+    {
+        $vendedores = [ 1 => 'Paulo',
+                        2 => 'Carla',
+                        3 => 'João', 
+                        4 => 'Isonequex'];
+        
+
+        return array_key_exists($id, $vendedores);
+    }
+
+    public function getVendedor(int $id):string
+    {
+        $vendedores = [ 1 => 'Paulo',
+                        2 => 'Carla',
+                        3 => 'João', 
+                        4 => 'Isonequex'];
+
+        return $vendedores[$id];
+    }
+
+    
+
 }

@@ -27,7 +27,4 @@ class VendedoresControllerTest extends TestCase
         $this->assertFalse($this->vendedores->checkVendedor(5));
     }
 
-    public function testGetVendedor(){
-        $this->assertEquals('Paulo', $this->vendedores->getVendedor(2));
-    }
 }
